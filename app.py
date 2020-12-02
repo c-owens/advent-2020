@@ -17,3 +17,4 @@ for class_name, class_type in problems.items():
     print(f"--- {problem.name} ---")
     problem.solve_a()
     problem.solve_b()
+    print()
