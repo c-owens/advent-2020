@@ -53,9 +53,6 @@ class Day1(Problem):
                     solution = first_num * second_num * desired_num
                     print( f"{first_num} * {second_num} * {desired_num} = {solution}" )
                     return solution
-                
-
-        print("Solved B")
 
     @property
     def name(self) -> str:
