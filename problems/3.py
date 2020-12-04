@@ -15,14 +15,12 @@ class Day3(Problem):
 
         # Starting with 0, 0 at the top left, the first index is the row offset and the 
         # second index is the column offset.
-        row = 0
         col = 0
         collisions = 0
-        while row <= height - 1:
+        for row in range(0, height, y):
             if self.input[row][col % width] == "#":
                 collisions += 1
             col += x
-            row += y
 
         return collisions
 
