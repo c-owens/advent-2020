@@ -9,7 +9,7 @@ class Day3(Problem):
     def __init__(self):
         Problem.__init__(self)
 
-    def solve(self, x_distance : int, y_distance : int) -> int:
+    def solve(self, x: int, y: int) -> int:
         height = len(self.input)
         width = len(self.input[0])
 
@@ -19,30 +19,24 @@ class Day3(Problem):
         col = 0
         collisions = 0
         while row <= height - 1:
-            # Convert the total column number we want to check into the corresponding
-            # column value in the smaller input data.
-            x = col
-            if x >= width:
-                 x = x % width
-
-            if self.input[row][x] == "#":
+            if self.input[row][col % width] == "#":
                 collisions += 1
-            col += x_distance
-            row += y_distance
+            col += x
+            row += y
 
         return collisions
 
     def solve_a(self) -> int:
-        collisions = self.solve(x_distance=3, y_distance=1)
+        collisions = self.solve(x=3, y=1)
         print(f"{collisions} collisions detected")
 
     def solve_b(self) -> int:
-        # The same as the a solution, but do it with 5 different distances and multiply them
-        a = self.solve(x_distance=1, y_distance=1)
-        b = self.solve(x_distance=3, y_distance=1)
-        c = self.solve(x_distance=5, y_distance=1)
-        d = self.solve(x_distance=7, y_distance=1)
-        e = self.solve(x_distance=1, y_distance=2)
+        # The same as the A solution, but do it with 5 different slopes and multiply the results
+        a = self.solve(x=1, y=1)
+        b = self.solve(x=3, y=1)
+        c = self.solve(x=5, y=1)
+        d = self.solve(x=7, y=1)
+        e = self.solve(x=1, y=2)
         solution = a * b * c * d * e
         print(f"{solution} collisions multiplied")
 
