@@ -2,7 +2,7 @@ from .problem import Problem
 
 class Day1(Problem):
     """
-    Solution for https://adventofcode.com/2020/day/1
+    Solution for https://adventofcode.com/2021/day/1
     """
 
     def __init__(self):
@@ -13,50 +13,31 @@ class Day1(Problem):
         for i in range(0, len(self.input)):
             self.input_ints.append(int(self.input[i]))
 
-        # Also store them as a set
-        self.input_set = set(self.input_ints)
-
     def solve_a(self) -> int:
         """
-        Find two numbers in the input that add up to 2020 and multiply them.
+        Count the number of cases where an integer is larger than the previous value
         """
-        goal_sum = 2020
-        for current_num in self.input_set:
-            desired_num = goal_sum - current_num
-            if desired_num in self.input_set:
-                print( f"{current_num} + {desired_num} = {goal_sum}" )
-                solution = current_num * desired_num
-                print( f"{current_num} * {desired_num} = {solution}" )
-                return solution
+        previous_num = None
+        increase_count = 0
+        for current_num in self.input_ints:
+            if previous_num is None:
+                previous_num = current_num
+                continue
+            if current_num > previous_num:
+                increase_count += 1
+            previous_num = current_num
+        print( f"Number of depth increases = {increase_count}")
+        return increase_count
 
     def solve_b(self) -> int:
         """
         Find three numbers in the input that add up to 2020 and multiply them.
         """
-        goal_sum = 2020
-        # Use the outer loop to track our first number
-        for idx1 in range(0, len(self.input_ints)):
-            first_num = self.input_ints[idx1]
-
-            # And an inner loop to track the second number
-            for idx2 in range(0, len(self.input_ints)):
-                # Don't evaluate the first number
-                if idx2 == idx1:
-                    continue
-
-                # Find the third number in the set that gets us to the goal sum
-                second_num = self.input_ints[idx2]
-                current_sum = first_num + second_num
-                desired_num = goal_sum - current_sum
-                if desired_num in self.input_set:
-                    print( f"{first_num} + {second_num} + {desired_num} = {goal_sum}" )
-                    solution = first_num * second_num * desired_num
-                    print( f"{first_num} * {second_num} * {desired_num} = {solution}" )
-                    return solution
+        pass
 
     @property
     def name(self) -> str:
-        return "Day 1: Report Repair"
+        return "Day 1: Sonar Sweep"
 
     @property
     def number(self) -> int:
