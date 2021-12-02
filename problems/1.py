@@ -31,9 +31,20 @@ class Day1(Problem):
 
     def solve_b(self) -> int:
         """
-        Find three numbers in the input that add up to 2020 and multiply them.
+        Sum every group of 3 numbers in the list and then count the cases where the sum is larger than the previous sum
         """
-        pass
+        previous_sum = None
+        increase_count = 0
+        for i in range(0, len(self.input_ints) - 2):
+            num_one = self.input_ints[i]
+            num_two = self.input_ints[i+1]
+            num_three = self.input_ints[i+2]
+            total = num_one + num_two + num_three
+            if previous_sum is not None and total > previous_sum:
+                increase_count += 1
+            previous_sum = total
+        print( f"Number of sliding depth increases = {increase_count}")
+        return increase_count
 
     @property
     def name(self) -> str:
